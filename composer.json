@@ -1,0 +1,19 @@
+{
+    "name": "sadick/php-router",
+    "description": "A simple php router",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sadick",
+            "email": "sadickjunior@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Resty\\": "src/"
+        }
+    }
+}
