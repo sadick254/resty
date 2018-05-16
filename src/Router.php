@@ -36,27 +36,42 @@ class Router
     }
     public function get($path, $callback)
     {
-        $this->routes[] = new Route($path, $callback, 'GET');
+        $args = \func_get_args();
+        $this->addRoute($args, 'GET');
     }
     public function all($path, $callback)
     {
-        $this->routes[] = new Route($path, $callback, 'ALL');
+        $args = \func_get_args();
+        $this->addRoute($args, 'ALL');
     }
     public function post($path, $callback)
     {
-        $this->routes[] = new Route($path, $callback, 'POST');
+        $args = \func_get_args();
+        $this->addRoute($args, 'POST');
     }
     public function delete($path, $callback)
     {
-        $this->routes[] = new Route($path, $callback, 'DELETE');
+        $args = \func_get_args();
+        $this->addRoute($args, 'DELETE');
     }
-    public function patch($path, $callback)
+    public function patch()
     {
-        $this->routes[] = new Route($path, $callback, 'PATCH');
+        $args = \func_get_args();
+        $this->addRoute($args, 'PATCH');
     }
-    public function put($path, $callback)
+    public function put()
     {
-        $this->routes[] = new Route($path, $callback, 'PUT');
+        $args = \func_get_args();
+        $this->addRoute($args, 'PUT');
+    }
+    private function addRoute($args, $method)
+    {
+        if (count($args) === 3) {
+            $this->routes[] = new Middleware($args[0], $args[1]);
+            $this->routes[] = new Route($args[0], $args[2], $method);
+            return;
+        }
+        $this->routes[] = new Route($args[0], $args[1], $method);
     }
     private function process()
     {
