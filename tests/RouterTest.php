@@ -112,4 +112,56 @@ class RouterTest extends TestCase
         $api->serve($config);
         $this->assertTrue($this->called);
     }
+
+    public function testCanAcceptMultipleMiddlewaresOnRoute()
+    {
+        $config = ['REQUEST_URI' => '/users', 'REQUEST_METHOD' => 'GET'];
+        $this->loggerCalled = false;
+        $logger = function ($req, $res, $next) {
+            $this->loggerCalled = true;
+            $next();
+        };
+        $this->timerCalled = false;
+        $timer = function ($req, $res, $next) {
+            $this->timerCalled = true;
+            $next();
+        };
+        $this->called = false;
+        $callback = function ($req, $res) {
+            $this->called = true;
+        };
+        $api = new Router();
+        $api->get('/users', $logger, $timer, $callback);
+        $api->serve($config);
+        $this->assertTrue($this->loggerCalled);
+        $this->assertTrue($this->timerCalled);
+        $this->assertTrue($this->called);
+
+    }
+
+    public function testCanAcceptMultipleMiddlewaresBeforeAndAfterOnRoute()
+    {
+        $config = ['REQUEST_URI' => '/users', 'REQUEST_METHOD' => 'GET'];
+        $this->loggerCalled = false;
+        $logger = function ($req, $res, $next) {
+            $this->loggerCalled = true;
+            $next();
+        };
+        $this->timerCalled = false;
+        $timer = function ($req, $res, $next) {
+            $this->timerCalled = true;
+            $next();
+        };
+        $this->called = false;
+        $callback = function ($req, $res) {
+            $this->called = true;
+        };
+        $api = new Router();
+        $api->get('/users', $logger, $callback, $timer);
+        $api->serve($config);
+        $this->assertTrue($this->loggerCalled);
+        $this->assertTrue($this->timerCalled);
+        $this->assertTrue($this->called);
+
+    }
 }

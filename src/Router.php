@@ -66,12 +66,21 @@ class Router
     }
     private function addRoute($args, $method)
     {
-        if (count($args) === 3) {
-            $this->routes[] = new Middleware($args[0], $args[1]);
-            $this->routes[] = new Route($args[0], $args[2], $method);
-            return;
+        foreach ($args as $key => $arg) {
+            if (is_callable($arg)) {
+                if ($this->isMiddleware($arg)) {
+                    $this->routes[] = new Middleware($args[0], $args[$key]);
+                } else {
+                    $this->routes[] = new Route($args[0], $arg, $method);
+                }
+            }
         }
-        $this->routes[] = new Route($args[0], $args[1], $method);
+
+    }
+    public function isMiddleware($func)
+    {
+        $closure = new \ReflectionFunction($func);
+        return $closure->getNumberOfParameters() === 3;
     }
     private function process()
     {
