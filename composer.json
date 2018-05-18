@@ -1,5 +1,5 @@
 {
-    "name": "sadick/php-router",
+    "name": "sadick/resty",
     "description": "A simple php router",
     "type": "library",
     "license": "MIT",
