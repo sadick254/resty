@@ -108,8 +108,8 @@ class RouterTest extends TestCase
         $logger = function ($req, $res, $next) {
             $this->called = true;
         };
-        $api->use("/users/:id/vehicle/o", $logger);
+        $api->use("/users/:id", $logger);
         $api->serve($config);
-        $this->assertFalse($this->called);
+        $this->assertTrue($this->called);
     }
 }
