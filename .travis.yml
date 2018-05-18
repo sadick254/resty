@@ -3,4 +3,8 @@ php:
   7.1
 before_script:
   - composer self-update
+<<<<<<< HEAD
 script: phpunit
+=======
+script: phpunit
+>>>>>>> 0ba24ebe2c4428221bc22f4fa7f8fb75f93dfd9e
