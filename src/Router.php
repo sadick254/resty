@@ -81,13 +81,15 @@ class Router
                     $reply = call_user_func($route->getCallback(), $this->request, $this->response);
                 }
             } else {
-                $this->called = false;
-                $next = function () {
-                    $this->called = true;
-                };
-                \call_user_func($route->getCallback(), $this->request, $this->response, $next);
-                if (!$this->called) {
-                    return;
+                if ($route->match($this->request)) {
+                    $this->called = false;
+                    $next = function () {
+                        $this->called = true;
+                    };
+                    \call_user_func($route->getCallback(), $this->request, $this->response, $next);
+                    if (!$this->called) {
+                        return;
+                    }
                 }
             }
         }
