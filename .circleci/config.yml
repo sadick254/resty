@@ -10,7 +10,9 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
           - v1-dependencies-
-
+      - run:
+          name: Check composer version
+          command: composer --version
       - run: composer install -n --prefer-dist
       - save_cache:
           paths:
