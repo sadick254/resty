@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:latest
+      - image: circleci/php:7.1-node-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -10,9 +10,8 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
           - v1-dependencies-
-      - run:
-          name: Check composer version
-          command: composer --version
+      - run: sudo composer self-update
+      - run: composer --version
       - run: composer install -n --prefer-dist
       - save_cache:
           paths:
