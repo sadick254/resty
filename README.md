@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/sadick254/resty/tree/master.svg?style=shield)](https://circleci.com/gh/sadick254/resty/tree/master)
+
 # Resty
 
 A fast, minimal with zero dependancies php router that enables you write straight forward rest api's
