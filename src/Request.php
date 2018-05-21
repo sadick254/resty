@@ -45,4 +45,31 @@ class Request
     {
         return $this->params;
     }
+    public function getProtocol()
+    {
+        return $_SERVER['SERVER_PROTOCOL'];
+    }
+    public function isConnectionSecure()
+    {
+        if (!isset($_SERVER['HTTPS'])) {
+            return false;
+        }
+        return $_SERVER['HTTPS'] === 'on';
+    }
+    public function getCookies()
+    {
+        return (object) $_COOKIE;
+    }
+    public function accepts($type)
+    {
+        return $_SERVER['CONTENT_TYPE'] === $type;
+    }
+    public function is($type)
+    {
+        return $_SERVER['CONTENT_TYPE'] === $type;
+    }
+    public function getIP()
+    {
+        return $_SERVER['REMOTE_ADDR'];
+    }
 }
