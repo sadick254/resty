@@ -35,6 +35,16 @@ class Response
      */
     public function sendFile(string $path)
     {
+        $chunks = \explode("/", $path);
+        $length = \count($chunks);
+        $filename = $chunks[$length - 1];
+        $finfo = \finfo_open(FILEINFO_MIME);
+        $info = \finfo_file($finfo, $path);
+        $this->setHeader("Content-Type", $info);
+        $this->setHeader("Content-disposition", "attachment;filename=$filename");
+        $this->setHeader("Content-Length", filesize($filename));
+        \readfile($path);
+        finfo_close($finfo);
     }
     /**
      * Appends additional header to the response
@@ -46,6 +56,7 @@ class Response
      */
     public function append(string $type, string $value)
     {
+        $this->setHeader($type, $value);
     }
     /**
      * Sets the response Content-Disposition header to attachment
@@ -79,7 +90,6 @@ class Response
      */
     public function clearCookie(string $name, ?array $options)
     {
-
     }
     /**
      * Ends the response process
@@ -88,7 +98,6 @@ class Response
      */
     public function end()
     {
-
     }
     /**
      * Gets the header specified by the type
@@ -99,7 +108,6 @@ class Response
      */
     public function getHeader(string $type): string
     {
-
     }
     /**
      * Sends a json response
@@ -123,7 +131,6 @@ class Response
      */
     public function sendStatus(int $code)
     {
-
     }
     /**
      * Sets the HTTP status for the response
@@ -134,6 +141,5 @@ class Response
      */
     public function setStatus(int $code)
     {
-
     }
 }
