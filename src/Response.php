@@ -65,8 +65,13 @@ class Response
      *
      * @return void
      */
-    public function setCookie(string $name, string $value, array $options)
+    public function setCookie(string $name, string $value, array $options = [])
     {
+        $expiry = $options['expiry'] ?? 0;
+        $path = $options['path'] ?? '';
+        $domain = $options['domain'] ?? '';
+        $secure = $options['secure'] ?? false;
+        \setcookie($name, $value, $expiry, $path, $domain, $secure);
     }
     /**
      * Clears a cookie that was prevoiusly set
