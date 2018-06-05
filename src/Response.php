@@ -81,8 +81,10 @@ class Response
      *
      * @return void
      */
-    public function clearCookie(string $name, ?array $options)
+    public function clearCookie(string $name)
     {
+        unset($_COOKIE[$name]);
+        $this->setCookie($name, "", ['expiry' => time() - 3600]);
     }
     /**
      * Sends a json response
