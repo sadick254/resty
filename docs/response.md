@@ -13,62 +13,48 @@ $api->get(/*route*/, function (Request $req, Response $res) {
 })
 ```
 
-## Response API Methods
+## Examples
 
-### $res->send(data)
-
-Sends html response to the client
+Send html response
 
 ```php
 $res->send('<b>ok</b>');
 ```
 
-### $res->json(data)
-
-Sends a json response
+Send json response
 
 ```php
 $data = [1, 2, 4];
 $res->json($data);
 ```
 
-### $res->sendFile(path)
-
-Sends the contents of the file
+Send contents of a file
 
 ```php
 $file = './file.txt';
 $res->sendFile($file);
 ```
 
-### $res->download(path)
-
-Sends the file and triggers download on the client
+Send file and trigger download on the client
 
 ```php
 $file = './file.txt';
 $res->download($file);
 ```
 
-### $res->setHeader(type, value)
-
-Sets the response header
+Set the response header
 
 ```php
 $res->setHeader("Content-Type", "text/plain");
 ```
 
-### $res->setStatus(code)
-
-Sets the http status code
+Set the http status code
 
 ```php
 $res->setStatus(403)
 ```
 
-### $res->setCookie($name,$value, $options)
-
-Sets cookie
+Set cookie
 
 ```php
 $res->setCookie("name","sadick");
@@ -83,9 +69,7 @@ $options = [
 $res->setCookie("age", "3", $options);
 ```
 
-### $res->clearCookie(name)
-
-Clears/Deletes a cookie
+Clear  cookie
 
 ```php
 $res->clearCookie("age");
