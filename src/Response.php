@@ -57,28 +57,6 @@ class Response
         finfo_close($finfo);
     }
     /**
-     * Appends additional header to the response
-     *
-     * @param string $type  the type of header to add
-     * @param string $value the value of the header
-     *
-     * @return void
-     */
-    public function append(string $type, string $value)
-    {
-        $this->setHeader($type, $value);
-    }
-    /**
-     * Sets the response Content-Disposition header to attachment
-     *
-     * @param string|null $path path to filename to be set
-     *
-     * @return void
-     */
-    public function attach(?string $path)
-    {
-    }
-    /**
      * Sets cookie header with the name and value
      *
      * @param string $name    name of the cookie to be set
@@ -102,24 +80,6 @@ class Response
     {
     }
     /**
-     * Ends the response process
-     *
-     * @return void
-     */
-    public function end()
-    {
-    }
-    /**
-     * Gets the header specified by the type
-     *
-     * @param string $type type of header
-     *
-     * @return string
-     */
-    public function getHeader(string $type): string
-    {
-    }
-    /**
      * Sends a json response
      *
      * @param array $data data to be sent to the client
@@ -131,16 +91,6 @@ class Response
         $json = \json_encode($data);
         $this->setHeader("Content-Type", "application/json");
         $this->send($json);
-    }
-    /**
-     * Sets the response HTTP status code to statusCode and send its string representation as the response body
-     *
-     * @param integer $code status code
-     *
-     * @return void
-     */
-    public function sendStatus(int $code)
-    {
     }
     /**
      * Sets the HTTP status for the response
