@@ -1,9 +1,9 @@
-## Middleware
+# Middleware
 
 HTTP middleware provide a convenient mechanism for catching HTTP requests entering your application.
 Middlewares can be used for authentication, loging, changing requests or response and any many more.
 
-### Writting A Middleware
+## Writting A Middleware
 
 Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle.
 
