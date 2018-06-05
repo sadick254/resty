@@ -24,6 +24,7 @@ class Response
      */
     public function setHeader(string $type, string $value)
     {
+        \header("$type: $value");
     }
     /**
      * Sends a file to the requesting client
@@ -109,7 +110,9 @@ class Response
      */
     public function json(array $data)
     {
-
+        $json = \json_encode($data);
+        $this->setHeader("Content-Type", "application/json");
+        $this->send($json);
     }
     /**
      * Sets the response HTTP status code to statusCode and send its string representation as the response body
