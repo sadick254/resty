@@ -27,6 +27,20 @@ class Response
         \header("$type: $value");
     }
     /**
+     * Sends the file to the client for download
+     *
+     * @param string $path filepath of the path to be downloaded
+     * @return void
+     */
+    public function download(string $path)
+    {
+        $chunks = \explode("/", $path);
+        $length = \count($chunks);
+        $filename = $chunks[$length - 1];
+        $this->setHeader("Content-disposition", "attachment;filename=$filename");
+        $this->sendFile($path);
+    }
+    /**
      * Sends a file to the requesting client
      *
      * @param string $path filepath of the file to be sent
@@ -35,14 +49,10 @@ class Response
      */
     public function sendFile(string $path)
     {
-        $chunks = \explode("/", $path);
-        $length = \count($chunks);
-        $filename = $chunks[$length - 1];
         $finfo = \finfo_open(FILEINFO_MIME);
         $info = \finfo_file($finfo, $path);
         $this->setHeader("Content-Type", $info);
-        $this->setHeader("Content-disposition", "attachment;filename=$filename");
-        $this->setHeader("Content-Length", filesize($filename));
+        $this->setHeader("Content-Length", filesize($path));
         \readfile($path);
         finfo_close($finfo);
     }
