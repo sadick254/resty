@@ -15,7 +15,7 @@ $api->get(/*route*/, function (Request $req, Response $res) {
 
 ## Response API Methods
 
-### `$res->send(data)`
+### $res->send(data)
 
 Sends html response to the client
 
@@ -23,7 +23,7 @@ Sends html response to the client
 $res->send('<b>ok</b>');
 ```
 
-### `$res->json(data)`
+### $res->json(data)
 
 Sends a json response
 
@@ -32,7 +32,7 @@ $data = [1, 2, 4];
 $res->json($data);
 ```
 
-### `$res->sendFile(path)`
+### $res->sendFile(path)
 
 Sends the contents of the file
 
@@ -41,7 +41,7 @@ $file = './file.txt';
 $res->sendFile($file);
 ```
 
-### `$res->download(path)`
+### $res->download(path)
 
 Sends the file and triggers download on the client
 
@@ -50,7 +50,7 @@ $file = './file.txt';
 $res->download($file);
 ```
 
-### `$res->setHeader(type, value)`
+### $res->setHeader(type, value)
 
 Sets the response header
 
@@ -58,7 +58,7 @@ Sets the response header
 $res->setHeader("Content-Type", "text/plain");
 ```
 
-### `$res->setStatus(code)`
+### $res->setStatus(code)
 
 Sets the http status code
 
@@ -66,7 +66,7 @@ Sets the http status code
 $res->setStatus(403)
 ```
 
-### `$res->setCookie($name,$value, $options)`
+### $res->setCookie($name,$value, $options)
 
 Sets cookie
 
@@ -83,7 +83,7 @@ $options = [
 $res->setCookie("age", "3", $options);
 ```
 
-### `$res->clearCookie(name)`
+### $res->clearCookie(name)
 
 Clears/Deletes a cookie
 
