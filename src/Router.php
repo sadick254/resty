@@ -8,7 +8,8 @@ class Router
     private $middlewares = [];
     private $response;
 
-    function use () {
+    public function use()
+    {
         $args = \func_get_args();
         $path = 'ALL';
         $callback = null;
@@ -75,7 +76,6 @@ class Router
                 }
             }
         }
-
     }
     public function isMiddleware($func)
     {
