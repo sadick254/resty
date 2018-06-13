@@ -43,8 +43,7 @@ class Middleware
             }
             $request->setParams((object) $params);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }
