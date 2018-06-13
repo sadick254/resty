@@ -27,23 +27,23 @@ class Middleware
         }
         $routeComponents = explode('/', $this->path);
         $uriComponents = explode('/', $request->getURI());
+        if (count($routeComponents) !== count($uriComponents)) {
+            return false;
+        }
         $params = [];
-        if (count($routeComponents) === count($uriComponents)) {
-            $arr = array_combine($routeComponents, $uriComponents);
-            foreach ($arr as $key => $value) {
-                $isVar = \strpos($key, ":") === 0;
-                if ($isVar) {
-                    $prop = \str_replace(':', '', $key);
-                    $params[$prop] = $value;
-                } else {
-                    if ($key !== $value) {
-                        return false;
-                    }
+        $arr = array_combine($routeComponents, $uriComponents);
+        foreach ($arr as $key => $value) {
+            $isVar = \strpos($key, ":") === 0;
+            if ($isVar) {
+                $prop = \str_replace(':', '', $key);
+                $params[$prop] = $value;
+            } else {
+                if ($key !== $value) {
+                    return false;
                 }
             }
-            $request->setParams((object) $params);
-            return true;
         }
-        return false;
+        $request->setParams((object) $params);
+        return true;
     }
 }
