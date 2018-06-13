@@ -62,7 +62,7 @@ class Request
     }
     public function accepts($type)
     {
-        return $_SERVER['CONTENT_TYPE'] === $type;
+        return $this->is($type);
     }
     public function is($type)
     {
