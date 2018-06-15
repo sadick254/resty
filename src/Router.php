@@ -7,7 +7,15 @@ class Router
     private $request;
     private $middlewares = [];
     private $response;
-
+    
+    public  function allowCors()
+    {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET,POST,OPTIONS,PUT,DELETE");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+        header("Content-Type: application/json");
+        header("Content-Type: *");
+    }
     public function use()
     {
         $args = \func_get_args();
