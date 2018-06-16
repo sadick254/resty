@@ -7,10 +7,12 @@ class Request
     private $server;
     private $headers;
     private $params;
+    private $envs;
 
     public function __construct($server)
     {
         $this->server = $server;
+        $this->envs = \array_merge(getenv(), $_SERVER, $_ENV);
     }
     public function getBody()
     {
@@ -71,5 +73,13 @@ class Request
     public function getIP()
     {
         return $_SERVER['REMOTE_ADDR'];
+    }
+    public function getEnvs(): array
+    {
+        return $this->envs;
+    }
+    public function getEnv(string $env)
+    {
+        return $this->envs[$env];
     }
 }
