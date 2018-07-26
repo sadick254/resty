@@ -9,6 +9,9 @@
             "email": "sadickjunior@gmail.com"
         }
     ],
+    "scripts": {
+        "test": "phpunit --whitelist src tests --colors=always"
+    },
     "require": {
     },
     "autoload": {
