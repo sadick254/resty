@@ -16,7 +16,9 @@ class Request
     }
     public function getBody()
     {
-        return json_decode(file_get_contents('php://input'));
+        $post = $_POST;
+        $input = json_decode(file_get_contents('php://input'), true) ?? array();
+        return array_merge($post, $input);
     }
     public function getMethod()
     {
