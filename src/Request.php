@@ -35,7 +35,11 @@ class Request
     }
     public function getHeader($header)
     {
-        return $this->getHeaders()[$header];
+        $headers = $this->getHeaders();
+        if (!isset($headers[$header])) {
+            return false;
+        }
+        return $headers[$header];
     }
     public function getURI()
     {
