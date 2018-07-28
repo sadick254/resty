@@ -147,20 +147,14 @@ class RouterTest extends TestCase
             $this->loggerCalled = true;
             $next();
         };
-        $this->timerCalled = false;
-        $timer = function ($req, $res, $next) {
-            $this->timerCalled = true;
-            $next();
-        };
         $this->called = false;
         $callback = function ($req, $res) {
             $this->called = true;
         };
         $api = new Router();
-        $api->get('/users', $logger, $callback, $timer);
+        $api->get('/users', $logger, $callback);
         $api->serve($config);
         $this->assertTrue($this->loggerCalled);
-        $this->assertTrue($this->timerCalled);
         $this->assertTrue($this->called);
 
     }
