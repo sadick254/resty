@@ -96,6 +96,7 @@ class Router
             if ($route instanceof Route) {
                 if ($route->match($this->request)) {
                     $reply = call_user_func($route->getCallback(), $this->request, $this->response);
+                    
                     if ($reply) {
                         \is_array($reply) ?  $this->response->json($reply) : $this->response->send($reply);
                     }
