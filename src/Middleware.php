@@ -33,7 +33,7 @@ class Middleware
         $params = [];
         $arr = array_combine($routeComponents, $uriComponents);
         foreach ($arr as $key => $value) {
-            $isVar = \strpos($key, ":") === 0;
+            $isVar = \strpos($key, ':') === 0;
             if ($isVar) {
                 $prop = \str_replace(':', '', $key);
                 $params[$prop] = $value;
